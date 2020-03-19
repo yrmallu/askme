@@ -13,11 +13,6 @@ class AnswersController < ApplicationController
     end
   end
 
-  def destroy
-    @answer = Answer.find(params[:id])
-    questions_path if @answer.destroy
-  end
-
   private
 
   def answer_params
