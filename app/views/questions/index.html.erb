@@ -1,0 +1,15 @@
+<% @questions.each do |question| %>
+  <div data-id="<%= question.id %>">
+    <%= link_to question do %>
+      <h3><%= question.title %></h3>
+    <% end %>
+    <div>Published by <%= question.user.email %> at <%= time_ago_in_words question.created_at %></div>
+    <div><%= truncate(strip_tags(question.body), length: 250, escape: false) %></div>
+    <% if signed_in? && question.user == current_user %>
+      <div>
+        <%= link_to 'edit', edit_question_path(question) %>
+        <%= link_to 'delete', question, method: :delete, data: { confirm: "Do you want delete this question?" } %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

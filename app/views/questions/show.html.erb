@@ -1,0 +1,15 @@
+<%= link_to "Questions", questions_path %>
+<div>
+  <h2><%= @question.title %></h2>
+  <div><%= @question.body.html_safe %></div>
+</div>
+
+<div>
+  <% @question.answers.order('created_at').each do |answer| %>
+    <%= render 'answers/show', answer: answer %>
+  <% end %>
+  <br>
+  <% if signed_in? %>
+    <%= render 'answers/new', question: @question %>
+  <% end %>
+</div>
